@@ -17,8 +17,7 @@ Plug 'tpope/vim-commentary'
 Plug 'dense-analysis/ale'
 
 "colorscheme"
-Plug 'cocopon/iceberg.vim'
-Plug 'NLKNguyen/papercolor-theme'
+Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -40,14 +39,12 @@ set autoread
 set nocompatible
 set wildmenu
 
-colorscheme iceberg
-let g:airline_theme='iceberg'
+colorscheme gruvbox 
+set background=dark
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_light='soft'
 
 let NERDTreeShowHidden=1
-
-"open NERDTree automatically when vim starts up on opening a directory
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | wincmd p | ene | exe 'NERDTree' argv()[0] | endif
 
 "linters
 let g:ale_linters = {'ruby': ['rubocop']}
@@ -69,7 +66,6 @@ let g:airline_section_y='%{LinterStatus()}'
 let g:airline#extensions#tabline#enabled = 1
 
 "mappings
-
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <C-y> :NERDTreeFind<CR>
 nmap <C-p> :Files<cr>
@@ -77,3 +73,4 @@ nmap <C-f> :Ag<cr>
 nmap <C-l> :bnext<CR>
 nmap <C-h> :bprevious<CR>
 nnoremap c :bp\|bd #<CR>
+map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
