@@ -38,16 +38,19 @@ set smartcase
 set autoread
 set nocompatible
 set wildmenu
+set clipboard=unnamedplus
 
-colorscheme gruvbox 
 set background=dark
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_contrast_light='soft'
+colorscheme gruvbox 
 
 let NERDTreeShowHidden=1
 
 "linters
 let g:ale_linters = {'ruby': ['rubocop']}
+
+highlight ALEWarning ctermbg=DarkMagenta
 
 function! LinterStatus() abort
   let l:counts = ale#statusline#Count(bufnr(''))
@@ -72,5 +75,6 @@ nmap <C-p> :Files<cr>
 nmap <C-f> :Ag<cr>
 nmap <C-l> :bnext<CR>
 nmap <C-h> :bprevious<CR>
-nnoremap c :bp\|bd #<CR>
-map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+nmap c :bp\|bd #<CR>
+vnoremap <C-c> "+y
+nmap <Leader>bg :let &background = ( &background == "dark" ? "light" : "dark" )<CR>
