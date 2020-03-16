@@ -40,17 +40,26 @@ set nocompatible
 set wildmenu
 set clipboard=unnamedplus
 
-set background=dark
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_contrast_light='soft'
-colorscheme gruvbox 
-
 let NERDTreeShowHidden=1
 
-"linters
-let g:ale_linters = {'ruby': ['rubocop']}
+set background=dark
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_light='medium'
+colorscheme gruvbox
 
+" ALE colors
 highlight ALEWarning ctermbg=DarkMagenta
+highlight ALEWarning ctermfg=Black
+highlight ALEError ctermbg=DarkRed
+highlight ALEError ctermfg=White
+highlight WhitespaceEOL ctermbg=red guibg=#ab0d0d
+match WhitespaceEOL /\s\+\%#\@<!$/
+
+"linters
+let g:ale_linters = {
+\  'ruby': ['rubocop'],
+\  'javascript': ['eslint']
+\}
 
 function! LinterStatus() abort
   let l:counts = ale#statusline#Count(bufnr(''))
@@ -71,10 +80,12 @@ let g:airline#extensions#tabline#enabled = 1
 "mappings
 nmap <C-n> :NERDTreeToggle<CR>
 nmap <C-y> :NERDTreeFind<CR>
-nmap <C-p> :Files<cr>
-nmap <C-f> :Ag<cr>
+nmap <C-p> :Files<CR>
+nmap <C-f> :Ag<CR>
 nmap <C-l> :bnext<CR>
 nmap <C-h> :bprevious<CR>
 nmap c :bp\|bd #<CR>
 vnoremap <C-c> "+y
-nmap <Leader>bg :let &background = ( &background == "dark" ? "light" : "dark" )<CR>
+nmap <Leader>bg :let &background = ( &background == "dark" ? "light" : "dark" ) \| :highlight ALEWarning ctermbg=Red ctermfg=Black<CR>
+"Remove all trailing whitespaces
+nnoremap <C-t> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
