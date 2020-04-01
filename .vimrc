@@ -15,6 +15,7 @@ Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'dense-analysis/ale'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 "colorscheme"
 Plug 'morhetz/gruvbox'
@@ -76,6 +77,8 @@ endfunction
 
 let g:airline_section_y='%{LinterStatus()}'
 let g:airline#extensions#tabline#enabled = 1
+
+au FocusGained,BufEnter * :checktime
 
 "mappings
 nmap <C-n> :NERDTreeToggle<CR>
