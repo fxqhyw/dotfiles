@@ -16,6 +16,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'
 Plug 'dense-analysis/ale'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'Yggdroot/indentLine'
 
 "colorscheme"
 Plug 'morhetz/gruvbox'
@@ -88,7 +89,6 @@ nmap <C-f> :Ag<CR>
 nmap <C-l> :bnext<CR>
 nmap <C-h> :bprevious<CR>
 nmap c :bp\|bd #<CR>
-vnoremap <C-c> "+y
 nmap <Leader>bg :let &background = ( &background == "dark" ? "light" : "dark" ) \| :highlight ALEWarning ctermbg=Red ctermfg=Black<CR>
 "Remove all trailing whitespaces
 nnoremap <C-t> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
